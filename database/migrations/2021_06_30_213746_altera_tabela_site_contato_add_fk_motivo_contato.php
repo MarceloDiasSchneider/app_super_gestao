@@ -39,7 +39,7 @@ class AlteraTabelaSiteContatoAddFkMotivoContato extends Migration
         // criando a coluna motivo_contato e removendo a fk
         Schema::table('site_contatos', function( Blueprint $table) {
             $table->integer('motivo_contato')->after('email');
-            $table->dropForeign('site_contat    os_motivo_contatos_id_foreign');
+            $table->dropForeign('site_contatos_motivo_contatos_id_foreign');
         });
 
         // transportando os dados de motivo_contatos_id para  motivo_contato
