@@ -9,7 +9,7 @@ class PrincipalController extends Controller
 {
     public function principal()
     {
-        $options_motivo_contato = MotivoContato::all()->toArray();
+        $options_motivo_contato = MotivoContato::all();
 
         // titulo da pagina enviado ao componente
         $titulo = 'Home';

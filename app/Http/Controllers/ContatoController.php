@@ -10,7 +10,7 @@ class ContatoController extends Controller
 {
     public function contato()
     {
-        $options_motivo_contato = MotivoContato::all()->toArray();
+        $options_motivo_contato = MotivoContato::all();
 
         // titulo da pagina enviado ao componente
         $titulo = 'Contato';
