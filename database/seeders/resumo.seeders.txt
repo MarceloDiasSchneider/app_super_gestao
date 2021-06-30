@@ -1,0 +1,25 @@
+# como semear o banco de dados
+| Criando as classes seeders
+| Definindo os valores inseridos
+php artisan make:seeder FaornecedorSeeder
+| temos que criar os objetos a serem inseridos
+| - com a estacia da classe e definindo os atributos e savar
+| - ou (se $fillable estiver definido na classe) podemos usar o metodo estatico create passando um array definindo os atributos
+
+| Utilizando Faker para criar os dados
+php artisan make:seeder SiteContatoSeeder
+| configurando a factory
+SiteContato::factory(50)->create();
+
+| criando uma factory para semear os dados com o recusro faker
+php artisan make:factory SiteContatoFactory --model=SiteContato
+| no return devemor configurar os atributos a serem criandos
+
+| temos que incluir no metodo run() da classe DatabaseSeeder a instrução para semear
+$this->call(FornecedorSeeder::class); // chamando a class
+\App\Models\SiteContato::factory(10)->create(); // utilizando o NameSpace com os metodos não ha a necessidade de criação da classe seeders
+
+| semeando as classes definidas em DatabaseSeeder run()
+php artisan db:seed
+| semeando uma classe especifia
+php artisan db:seed --class SiteContatoSeeder

@@ -1,0 +1,95 @@
+# Estanciar uma classe
+$estancia = new \Name\Space()
+
+$estancia->atributo_1
+$estancia->atributo_2
+
+print_r($estancia->getAttributes())
+unset($estancia->atributo_1)
+
+$estancia->save()
+
+# Depois de abilitar a inserção de dados com o atributo $fillable podemos accessar um metodo estático diretamente.
+$Name\Space::create(['array' => 'todos os campos'])
+
+# Também podemos definir o uso da classe no tinker com o comando use \Name\Space
+use \App\Models\Fornecedor
+
+# Podemos retirar os dados do banco de dados com o tinker
+$f = Fornecedor::all()->toArray();
+$f2 = Fornecedor::find([1,2]);
+$f2 = Fornecedor::where('coluna', 'operador', 'valor')->get();
+$f2 = Fornecedor::where('id', '>', '1')->get();
+$f2 = Fornecedor::where('site', 'like', '%.com')->get();
+$sc = SiteContato::whereIn('comparação_igualdade','conjunto_de_parametros')->get();
+$sc = SiteContato::whereIn('motivo_contato', [1,3])->get();
+$sc = SiteContato::whereNotIn('motivo_contato', [1,3])->get();
+$sc = SiteContato::whereBetween('id', [3,6])->get();
+$sc = SiteContato::whereNotBetween('id', [3,6])->get();
+$sc = SiteContato::whereNull('updated_at')->get();
+$sc = SiteContato::whereNotNull('updated_at')->get();
+$sc = SiteContato::whereDate('created_at', '2021-06-28')->get();
+$sc = SiteContato::whereDay('created_at', '28')->get();
+$sc = SiteContato::whereMonth('created_at', '06')->get();
+$sc = SiteContato::whereYear('created_at', '06')->get();
+$sc = SiteContato::whereTime('created_at', '>=', '09:00:00')->whereTime('created_at', '<', '12:00:00')->get();
+$sc = SiteContato::whereColumn('created_at', '=', 'updated_at')->get();
+
+
+# combinando as condições com where e orWhere
+$sc = SiteContato::where('nome', '<>', 'marcelo')->whereIn('motivo_contato', [1,2])->orWhereBetween('created_at', ['2021-03-01 00:00:00', '2021-06-31 23:59:59'])->get();
+
+# Grupos de comparação
+$sc = SiteContato::where(function($query){ $query->where('nome', 'Marcelo')->orWhere('nome', 'Jorge'); })->where(function($query){ $query->whereIn('motivo_contato', [1,2])->orWhereBetween('id', [4,6]); })->get();
+
+# Ordenação de registros
+$sc = SiteContato::whereBetween('id', [2,10])->orderBy('motivo_contato', 'asc')->orderBy('nome', 'asc')->get()->toArray();
+
+# Digging Deeper - Collections
+->first()
+->last()
+->reverse()
+->toArray()
+->toJson()
+->pluck('', '')
+
+# para atualizar informações no banco de dados, podemos recuperar um registro, atualizar o atributo e utilizar o metodo ->save()
+$fornecedor = Fornecedor::find(1)
+$fornecedor->site = 'quattroventi.com.br'
+$fornecedor-save()
+
+// se os campos estiverem habilitados na class como $fillable podemos passar os dados como array
+$fornecedor2 = Fornecedor::find(2)
+$fornecedor2->fill(['uf'=> 'RM'])
+$fornecedor2-save()
+
+# update
+// podemos fazer uma busca no banco de dados com qualquer filtro, where, where in etc... e chamar o metodo ->update(['coluna'=>'valor'])
+# $fornecedor = Fornecedor::whereIn('id', [1,2])->update(['nome' => 'Fornecedor atualizado'])
+
+# deletar e destroy
+// podemos fazer uma busca no banco de dados com qualquer filtro, where, where in etc... e chamar o metodo ->delete()
+SiteContato::find(4)->delete()
+// também podemos usar o metodo destroy() pasando os ids
+SiteContato::destroy(6,7)
+
+# soft delete
+// É um recurso para inativar os dados no banco de dados ao invez de realmente deletarlos.
+| Para ativar este recurso, devemos fazer os seguintes passos:
+| - Habilitar na model o SoftDeletes
+| - use Illuminate\Database\Eloquent\SoftDeletes; // adicionando o NameSpace
+| - use SoftDeletes; // adicionando dentro da classe
+| Adicionar ao banco de dados a coluna deleted_at com o recurso SoftDeletes e Migration
+| - $table->softDeletes(); // no metodo up() para criar a coluna
+| - $table->dropSoftDeletes(); // no metodo down() para remover a coluna
+
+# inativar
+Fornecedor::find(2)->delete() // inativa os registros
+# deleta
+Fornecedor::find(3)->forceDelete() // deleta os registros
+# recuperar
+Fornecedor::all() // recupera todos os registros ativos
+Fornecedor::withTrashed()->get() // recupera todos os registro ativos e inativos
+Fornecedor::onlyTrashed()->get() // recupera somente os registro inativos
+# reativar
+Fornecedor::onlyTrashed()->find(2)->restore // reativa os registro inativos
