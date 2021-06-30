@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MotivoContato;
 use Illuminate\Http\Request;
 
 class PrincipalController extends Controller
 {
     public function principal()
     {
-        $options_motivo_contato = [
-            '1' => 'Dúvida',
-            '2' => 'Elogio',
-            '3' => 'Reclamação',
-        ];
+        $options_motivo_contato = MotivoContato::all()->toArray();
 
         // titulo da pagina enviado ao componente
         $titulo = 'Home';

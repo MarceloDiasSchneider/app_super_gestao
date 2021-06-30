@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MotivoContato;
 use Illuminate\Http\Request;
 use App\Models\SiteContato;
 
@@ -9,11 +10,7 @@ class ContatoController extends Controller
 {
     public function contato()
     {
-        $options_motivo_contato = [
-            '1' => 'Dúvida',
-            '2' => 'Elogio',
-            '3' => 'Reclamação',
-        ];
+        $options_motivo_contato = MotivoContato::all()->toArray();
 
         // titulo da pagina enviado ao componente
         $titulo = 'Contato';
