@@ -1,9 +1,9 @@
 # como semear o banco de dados
 | Criando as classes seeders
 | Definindo os valores inseridos
-php artisan make:seeder FaornecedorSeeder
+php artisan make:seeder FornecedorSeeder
 | temos que criar os objetos a serem inseridos
-| - com a estacia da classe e definindo os atributos e savar
+| - com a estancia da classe e definir os atributos e salvar
 | - ou (se $fillable estiver definido na classe) podemos usar o metodo estatico create passando um array definindo os atributos
 
 | Utilizando Faker para criar os dados
