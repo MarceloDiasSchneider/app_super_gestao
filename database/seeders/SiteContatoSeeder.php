@@ -18,10 +18,11 @@ class SiteContatoSeeder extends Seeder
         $contato->nome = 'Contato Default';
         $contato->telefone = '+39 123 456 1234';
         $contato->email = 'contato@supergestao.com.br';
-        $contato->motivo_contato = '1';
+        // $contato->motivo_contato = '1'; // obsoleto na migrations 2021_06_30_213746
+        $contato->motivo_contatos_id = '1';
         $contato->mensagem = 'Uma mensagem default de teste';
         $contato->save();
 
-        SiteContato::factory(5)->create();
+        SiteContato::factory(9)->create();
     }
 }

@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         // chamando a class seeder em database/seeders/FornecedorSeeder.php
         $this->call(FornecedorSeeder::class);
         $this->call(MotivoContatoSeeder::class);
+        $this->call(SiteContatoSeeder::class);
+
         // chamando a class App/Models/SiteContato
         \App\Models\SiteContato::factory(10)->create();
     }
