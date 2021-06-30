@@ -9,9 +9,15 @@ class ContatoController extends Controller
 {
     public function contato()
     {
+        $options_motivo_contato = [
+            '1' => 'Dúvida',
+            '2' => 'Elogio',
+            '3' => 'Reclamação',
+        ];
+
         // titulo da pagina enviado ao componente
         $titulo = 'Contato';
-        return view('site.contato', compact('titulo'));
+        return view('site.contato', compact('titulo', 'options_motivo_contato'));
     }
 
     public function formasDeRecuperarDadosDoFormulario()
@@ -55,7 +61,7 @@ class ContatoController extends Controller
             'telefone' => 'required|min:10|max:20',
             // 'email' => 'required',
             // 'motivo_contato' => 'required',
-            'mensagem' => 'required|min:15|max|750',
+            'mensagem' => 'required|min:15|max:750',
         ]);
 
         // inserindo os dados no banco de dados
