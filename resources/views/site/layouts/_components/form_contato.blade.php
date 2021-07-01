@@ -6,7 +6,7 @@
     <br>
     <input type="email" name="email" value="{{ old('email') }}" placeholder="E-mail" class="{{ $class }}">
     <br>
-    <select name="motivo_contato" class="{{ $class }}">
+    <select name="motivo_contatos_id" class="{{ $class }}">
         <option value="">Qual o motivo do contato?</option>
         @foreach ($options_motivo_contato as $key => $motivo_contato)
             <option value="{{ $motivo_contato->id }}" {{ old('motivo_contato') == $motivo_contato->id ? 'selected' : '' }}>{{ $motivo_contato->motivo }}</option>
@@ -19,6 +19,9 @@
 </form>
 {{ $slot }}
 
+{{-- @if(count(old()))
+    @dd($errors->default->messages)
+@endif --}}
 {{-- Exibindo a variavel $errors --}}
 {{-- <div style='position:absolute; top:0; left:0; width:100%; background:silver'>
     <pre>
