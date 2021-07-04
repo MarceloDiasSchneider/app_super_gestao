@@ -28,7 +28,7 @@
     @dd($errors->default->messages)
 @endif --}}
 {{-- Exibindo a variavel $errors --}}
-@if($errors->any())
+{{-- @if($errors->any())
     <div style='position:absolute; top:0; left:0; width:100%; background:silver'>
         @foreach ($errors->all() as $key => $error)
             {{ $key }} =
@@ -36,4 +36,4 @@
             <br>
         @endforeach
     </div>
-@endif
+@endif --}}
