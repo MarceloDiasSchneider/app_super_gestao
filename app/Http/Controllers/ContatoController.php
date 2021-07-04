@@ -52,14 +52,29 @@ class ContatoController extends Controller
     public function salvar(Request $request)
     {
         // validando os dados do formulario
-        $request->validate([
+        $validacao = [
             // nome com no minimo 3 e maximo 50 caracteres
             'nome' => 'required|min:3|max:50',
             'telefone' => 'required|min:10|max:20',
-            'email' => 'email',
+            // unique:table | unique irá buscar na table informada, buscando na coluna com o mesmo nome da chave do array | select email from site_contatos
+            'email' => 'required|email|unique:site_contatos',
             'motivo_contatos_id' => 'required',
             'mensagem' => 'required|min:15|max:750',
-        ]);
+        ];
+        $feedback = [
+            // aplicando em todos os campos con required
+            'required' => 'O campo :attribute é obrigatorio',
+
+            'nome.min' => 'O nome deve conter mais de 3 caracteres',
+            'nome.max' => 'O nome deve conter até 50 caracteres',
+            'telefone.min' => 'O telefone deve conter mais de 10 caracteres',
+            'telefone.max' => 'O telefone deve conter até 20 caracteres',
+            'email.email' => 'O email informado não é valido',
+            'email.unique' => 'O email informado já esta registrado',
+            'mensagem.min' => 'A mensagem deve conter mais de 15 caracteres',
+            'mensagem.max' => 'A mensagem deve conter até 750 caracteres',
+        ];
+        $request->validate( $validacao, $feedback);
 
         // inserindo os dados no banco de dados
         SiteContato::create($request->all());
