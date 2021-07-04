@@ -6,7 +6,8 @@ use App\Http\Controllers\SobrenosController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\ParametrosController;
-use Illuminate\Validation\Rules\In;
+use App\Http\Middleware\LogAcessoMiddleware;
+// use Illuminate\Validation\Rules\In;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +28,22 @@ use Illuminate\Validation\Rules\In;
 # metodo http (GET, POST, PATCH, DELETE, PUT)
 # rota '/abc'
 # classe/controller [classe::class, 'metodo']
-Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
 
-Route::get('/sobre-nos', [SobrenosController::class, 'sobrenos'])->name('site.sobre-nos');
+// Middleware sendo chamado aqui
+Route::middleware(LogAcessoMiddleware::class)
+->get('/', [PrincipalController::class, 'principal'])
+->name('site.index');
 
-Route::get('/contato', [ContatoController::class, 'contato'])->name('site.contato');
-Route::post('/contato', [ContatoController::class, 'salvar'])->name('site.contato');
+// Middleware sendo chamado aqui
+Route::middleware(LogAcessoMiddleware::class)
+->get('/sobre-nos', [SobrenosController::class, 'sobrenos'])
+->name('site.sobre-nos');
+
+// Middleware sendo chamado na classe controladora
+Route::get('/contato', [ContatoController::class, 'contato'])
+    ->name('site.contato');
+Route::post('/contato', [ContatoController::class, 'validar_salvar'])
+    ->name('site.contato');
 
 Route::get('/login', function(){ return 'login';})->name('site.login');
 

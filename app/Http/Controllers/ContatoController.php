@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogAcesso;
 use App\Models\MotivoContato;
-use Illuminate\Http\Request;
 use App\Models\SiteContato;
+use Illuminate\Http\Request;
+use App\Http\Middleware\LogAcessoMiddleware;
 
 class ContatoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(LogAcessoMiddleware::class);
+    }
+
     public function contato()
     {
         $options_motivo_contato = MotivoContato::all();
@@ -49,7 +56,7 @@ class ContatoController extends Controller
         // SiteContato::create($request->all());
     }
 
-    public function salvar(Request $request)
+    public function validar_salvar(Request $request)
     {
         // validando os dados do formulario
         $validacao = [
