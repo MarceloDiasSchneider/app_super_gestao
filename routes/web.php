@@ -28,18 +28,18 @@ use App\Http\Middleware\LogAcessoMiddleware;
 # metodo http (GET, POST, PATCH, DELETE, PUT)
 # rota '/abc'
 # classe/controller [classe::class, 'metodo']
+/*
+    # Middleware
+    // Middleware sendo chamado aqui em route
+    // Route::middleware(LogAcessoMiddleware::class)->get('/', [PrincipalController::class, 'principal'])->name('site.index');
+    // Middleware sendo chamado atravez de uma apelido definido em kernel protected $routeMiddleware
+    // Route::middleware('log.acesso')->get('/sobre-nos', [SobrenosController::class, 'sobrenos'])->name('site.sobre-nos');
+    // Middleware sendo chamado na classe controladora com metodo contrutor
+    // Middleware podem ser chamado em todas as rotas se definido em kernel protected $middlewareGroups
+*/
+Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
+Route::get('/sobre-nos', [SobrenosController::class, 'sobrenos'])->name('site.sobre-nos');
 
-// Middleware sendo chamado aqui
-Route::middleware(LogAcessoMiddleware::class)
-->get('/', [PrincipalController::class, 'principal'])
-->name('site.index');
-
-// Middleware sendo chamado aqui
-Route::middleware(LogAcessoMiddleware::class)
-->get('/sobre-nos', [SobrenosController::class, 'sobrenos'])
-->name('site.sobre-nos');
-
-// Middleware sendo chamado na classe controladora
 Route::get('/contato', [ContatoController::class, 'contato'])
     ->name('site.contato');
 Route::post('/contato', [ContatoController::class, 'validar_salvar'])

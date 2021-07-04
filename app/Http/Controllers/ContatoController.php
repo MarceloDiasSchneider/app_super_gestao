@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LogAcesso;
 use App\Models\MotivoContato;
 use App\Models\SiteContato;
 use Illuminate\Http\Request;
@@ -12,7 +11,9 @@ class ContatoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(LogAcessoMiddleware::class);
+        // Middleware definido nesta classe controladora
+        // $this->middleware(LogAcessoMiddleware::class); // definando a classe,"use App\Http\Middleware\LogAcessoMiddleware" deve ser incluido no inicio do arquivo
+        // $this->middleware('log.acesso'); // definando com apelido, sem a necessidade da inclusão do "use"
     }
 
     public function contato()
