@@ -5,6 +5,7 @@ use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobrenosController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParametrosController;
 use App\Http\Middleware\LogAcessoMiddleware;
 // use Illuminate\Validation\Rules\In;
@@ -45,14 +46,15 @@ Route::get('/contato', [ContatoController::class, 'contato'])
 Route::post('/contato', [ContatoController::class, 'validar_salvar'])
     ->name('site.contato');
 
-Route::get('/login', function(){ return 'login';})->name('site.login');
+Route::get('/login/{erro?}', [LoginController::class, 'index'])->name('site.login');
+Route::post('/login', [LoginController::class, 'autenticar'])->name('site.login');
 
 # agrupando rotes
-Route::middleware('log.acesso','autenticacao:padrao,usuario')->prefix('/app')->group( function () {
+Route::middleware('autenticacao','log.acesso')->prefix('/app')->group( function () {
     Route::get('/clientes', function(){ return 'clientes';})
     ->name('app.clientes');
     Route::get('/fornecedores', [FornecedorController::class, 'index'])
-    ->name('app.forenecedores');
+    ->name('app.fornecedores');
     Route::get('/produtos', function(){ return 'produtos';})
     ->name('app.produtos');
 });

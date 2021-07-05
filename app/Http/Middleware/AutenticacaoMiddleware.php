@@ -15,19 +15,15 @@ class AutenticacaoMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $metodo_autenticacao, $perfil)
+    public function handle(Request $request, Closure $next)
     {
-        if ($metodo_autenticacao == 'padrao' && $perfil == 'visitante') {
-            return Response('Acesso negado!');
-        } elseif ($metodo_autenticacao == 'padrao' && $perfil == 'usuario') {
-            // recebendo a resposta da aplicação e atribuindo a uma variavel
-            $resposta = $next($request);
+        session_start();
 
-            // alterando o codigo http de resposta e a mensagem
-            $resposta->setStatusCode(201, 'Status alterado');
-
-            return $resposta;
-
+        if (isset($_SESSION['email'])) {
+            return $next($request);
+        } else {
+            // $erro = ['erro' => 'sessão expidada: faça a autenticacao'];
+            return redirect()->route('site.login', ['erro' => 'sessão expidada: faça a autenticação']);
         }
     }
 }
