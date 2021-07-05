@@ -48,12 +48,13 @@ Route::post('/contato', [ContatoController::class, 'validar_salvar'])
 Route::get('/login', function(){ return 'login';})->name('site.login');
 
 # agrupando rotes
-Route::prefix('/app')->group( function () {
-    Route::get('/clientes', function(){ return 'clientes';})->name('app.clientes');
-
-    Route::get('/fornecedores', [FornecedorController::class, 'index'])->name('app.forenecedores');
-
-    Route::get('/produtos', function(){ return 'produtos';})->name('app.produtos');
+Route::middleware('log.acesso','autenticacao:padrao,usuario')->prefix('/app')->group( function () {
+    Route::get('/clientes', function(){ return 'clientes';})
+    ->name('app.clientes');
+    Route::get('/fornecedores', [FornecedorController::class, 'index'])
+    ->name('app.forenecedores');
+    Route::get('/produtos', function(){ return 'produtos';})
+    ->name('app.produtos');
 });
 
 # Redirecionando de rotas
