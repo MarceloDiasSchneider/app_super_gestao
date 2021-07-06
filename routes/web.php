@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobrenosController;
 use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\ExemplosBladeController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -79,8 +80,11 @@ Route::fallback(function () {
     echo '<ul><li><a href="' . route('site.index') . '">Home</a></li></ul>';
 });
 
+# exemplos do blade
+Route::get('/exemplos', [ExemplosBladeController::class, 'index']);
+
 # passando parametros ao controlador
-Route::get('parametros/{p1}/{p2}', [ParametrosController::class, 'parametros'])->whereNumber('p1')->whereNumber('p2');
+Route::get('/parametros/{p1}/{p2}', [ParametrosController::class, 'parametros'])->whereNumber('p1')->whereNumber('p2');
 
 // # pasando pararemetros na url
 // ## parametros opcionais recebem ?
