@@ -22,7 +22,6 @@ class AutenticacaoMiddleware
         if (isset($_SESSION['email'])) {
             return $next($request);
         } else {
-            // $erro = ['erro' => 'sessão expidada: faça a autenticacao'];
             return redirect()->route('site.login', ['erro' => 'sessão expidada: faça a autenticação']);
         }
     }

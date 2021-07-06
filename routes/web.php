@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobrenosController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParametrosController;
+use App\Http\Controllers\ProdutosController;
 use App\Http\Middleware\LogAcessoMiddleware;
 // use Illuminate\Validation\Rules\In;
 
@@ -51,12 +54,11 @@ Route::post('/login', [LoginController::class, 'autenticar'])->name('site.login'
 
 # agrupando rotes
 Route::middleware('autenticacao','log.acesso')->prefix('/app')->group( function () {
-    Route::get('/clientes', function(){ return 'clientes';})
-    ->name('app.clientes');
-    Route::get('/fornecedores', [FornecedorController::class, 'index'])
-    ->name('app.fornecedores');
-    Route::get('/produtos', function(){ return 'produtos';})
-    ->name('app.produtos');
+    Route::get('/home', [HomeController::class, 'index'])->name('app.home');
+    Route::get('/cliente', [ClienteController::class, 'index'])->name('app.cliente');
+    Route::get('/fornecedor', [FornecedorController::class, 'index'])->name('app.fornecedor');
+    Route::get('/produto', [ProdutosController::class, 'index'])->name('app.produto');
+    Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
 });
 
 # Redirecionando de rotas
