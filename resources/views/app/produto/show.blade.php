@@ -13,18 +13,18 @@
 
         <div class="informacao-pagina">
             <div style="max-width: 550px; margin: auto;">
-                <table style="text-align: left; border: 1px solid silver">
-                    <tr style="border: 1px solid black">
-                        <td style="border: 1px solid black">ID</td>
-                        <td style="border: 1px solid black">{{ $produto->id }}</td>
+                <table border="1" style="text-align: left; min-width: 350px;">
+                    <tr >
+                        <td>ID</td>
+                        <td>{{ $produto->id }}</td>
                     </tr>
-                    <tr style="border: 1px solid black">
-                        <td style="border: 1px solid black">Nome</td>
-                        <td style="border: 1px solid black">{{ $produto->nome }}</td>
+                    <tr>
+                        <td>Nome</td>
+                        <td>{{ $produto->nome }}</td>
                     </tr>
-                    <tr style="border: 1px solid black">
-                        <td style="border: 1px solid black">Peso</td>
-                        <td style="border: 1px solid black">{{ $produto->peso . ' ' . $unidades[$produto->unidade_id]}}</td>
+                    <tr>
+                        <td>Peso</td>
+                        <td>{{ $produto->peso . ' ' . $unidades[$produto->unidade_id]}}</td>
                     </tr>
                 </table>
             </div>
