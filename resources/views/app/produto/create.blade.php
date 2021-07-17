@@ -13,15 +13,13 @@
 
         <div class="informacao-pagina">
             <div style="max-width: 550px; margin: auto;">
-                {{-- {{ $mensagem ?? '' }} --}}
                 <form method="post" action="{{ route('produto.store') }}">
-                    {{-- <input type="hidden" name="id" value="{{ $produto->id ?? '' }}"> --}}
                     @csrf
-                    <input type="text" name="nome" placeholder="Nome" class="borda-preta" value="{{ $produto->nome ?? old('nome') }}">
+                    <input type="text" name="nome" placeholder="Nome" class="borda-preta" value="{{ old('nome') }}">
                     {{ $errors->has('nome') ? $errors->first('nome') : '' }}
-                    <input type="text" name="descricao" placeholder="Descrição" class="borda-preta" value="{{ $produto->site ?? old('descricao') }}">
+                    <input type="text" name="descricao" placeholder="Descrição" class="borda-preta" value="{{ old('descricao') }}">
                     {{ $errors->has('descricao') ? $errors->first('descricao') : '' }}
-                    <input type="number" name="peso" placeholder="Peso" class="borda-preta" value="{{ $produto->uf ?? old('peso') }}">
+                    <input type="number" name="peso" placeholder="Peso" class="borda-preta" value="{{ old('peso') }}">
                     {{ $errors->has('peso') ? $errors->first('peso') : '' }}
                     <select name="unidade_id">
                         <option selected>Selecione uma unidaide</option>

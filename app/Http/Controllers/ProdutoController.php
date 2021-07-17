@@ -68,7 +68,9 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
+        $unidades = Unidade::all()->toArray();
+        $unidades = array_column($unidades, 'unidade', 'id');
+        return view('app.produto.show', compact('produto', 'unidades'));
     }
 
     /**
@@ -91,7 +93,7 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        echo 'update';
     }
 
     /**
@@ -102,6 +104,8 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        // $produto->find($produto)->delete();
+        echo 'destroy';
+        // return redirect()->route('poduto.index');
     }
 }
