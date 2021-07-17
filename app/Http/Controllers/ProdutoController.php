@@ -16,9 +16,10 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
+        $unidades = Unidade::all()->toArray();
+        $unidades = array_column($unidades, 'unidade', 'id');
         $produtos = Produto::paginate(10);
-
-        return view('app.produto.index', compact('produtos', 'request'));
+        return view('app.produto.index', compact('produtos', 'request', 'unidades'));
     }
 
     /**
@@ -81,7 +82,8 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        $unidades = Unidade::all();
+        return view('app.produto.edit', compact('produto', 'unidades'));
     }
 
     /**
@@ -93,7 +95,25 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        echo 'update';
+        $regras = [
+            'nome' => 'required|min:3|max:100',
+            'descricao' => 'required|min:5|max:750',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id',
+        ];
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'Nome deve ter ao menos 3 caracteres',
+            'nome.max' => 'Nomo deve ter até 100 caracteres',
+            'descricao.min' => 'Descrição deve ao menos 5 caracteres',
+            'descricao.max' => 'Descrição deve ter até 750 caracteres',
+            'peso.integer' => 'O peso deve ser um valor inteiro',
+            'unidade_id.exists' => 'Esta unidade não é valida',
+        ];
+        $request->validate($regras, $feedback);
+
+        $produto->update($request->all());
+        return redirect()->route('produto.show', $produto->id);
     }
 
     /**

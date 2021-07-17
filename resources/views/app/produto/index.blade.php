@@ -18,8 +18,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Descrição</th>
-                            <th>Peso</th>
-                            <th>Unidade ID</th>
+                            <th>Peso|Unidade</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -34,11 +33,10 @@
                             <tr>
                                 <th>{{ $produto->nome }}</th>
                                 <th>{{ $produto->descricao }}</th>
-                                <th>{{ $produto->peso }}</th>
-                                <th>{{ $produto->unidade_id }}</th>
+                                <th>{{ $produto->peso . ' ' . $unidades[$produto->unidade_id]}}</th>
                                 <th><a href="{{ route('produto.show', $produto->id) }}">Visualizar</a></th>
-                                <th><a href="{{ route('produto.update', $produto) }}">Editar</a></th>
-                                <th><a href="{{ route('produto.destroy', $produto)}}">Excluir</a></th>
+                                <th><a href="{{ route('produto.edit', $produto->id) }}">Editar</a></th>
+                                <th><a href="{{ route('produto.destroy', $produto->id)}}">Excluir</a></th>
                             </tr>
                         @endforeach
                     </tbody>

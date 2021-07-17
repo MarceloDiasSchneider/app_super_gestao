@@ -5,7 +5,7 @@
 @section('conteudo')
     <div class="conteudo-pagina">
         <div class="titulo-pagina-app">
-            <p>Adicionar produto</p>
+            <p>Ver produto</p>
         </div>
 
         @component('app.produto._components.menu')
