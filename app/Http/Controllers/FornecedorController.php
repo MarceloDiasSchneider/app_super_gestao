@@ -15,13 +15,14 @@ class FornecedorController extends Controller
 
     public function listar(Request $request)
     {
+        $request_all = $request->all();
         $fornecedores = Fornecedor::where('nome', 'like', '%'.$request->nome.'%' )
             ->where('site', 'like', '%'.$request->site.'%' )
             ->where('uf', 'like', '%'.$request->uf.'%' )
             ->where('email', 'like', '%'.$request->email.'%' )
-            ->get();
+            ->paginate(4);
 
-        return view('app.fornecedor.listar', compact('fornecedores'));
+        return view('app.fornecedor.listar', compact('fornecedores', 'request_all'));
     }
 
     public function adicionar(Request $request)
@@ -50,7 +51,7 @@ class FornecedorController extends Controller
                 # inserção no banco de dados
                 Fornecedor::create($request->all());
                 # define a mensagem de sucesso
-                $mensagem = 'Fornecedor cadastrado com sucesso';
+                $mensagem = 'cadastrado';
             } else {
                 # atualização no banco de dados
                 $fornecedor = Fornecedor::find($id);
@@ -58,9 +59,9 @@ class FornecedorController extends Controller
 
                 # define a mensagem de sucesso
                 if ($update) {
-                    $mensagem = 'Fornecedor atualizado com sucesso';
+                    $mensagem = 'atualizado';
                 } else {
-                    $mensagem = 'Problema na atulização';
+                    $mensagem = 'erro';
                 }
                 # retornando para editar
                 return redirect()->route('app.fornecedor.editar', compact('id','mensagem'));
@@ -78,5 +79,12 @@ class FornecedorController extends Controller
         # utilizando a view adicionar para editar
         return view('app.fornecedor.adicionar', compact('fornecedor', 'mensagem'));
 
+    }
+
+    public function excluir($id)
+    {
+        Fornecedor::find($id)->delete();
+
+        return redirect()->route('app.fornecedor.listar');
     }
 }

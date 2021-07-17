@@ -24,6 +24,10 @@
                             <th></th>
                         </tr>
                     </thead>
+                    <p>
+                        Listando {{ $fornecedores->count() }} de {{ $fornecedores->total() }} registros |
+                        De {{ $fornecedores->firstItem() }} a {{ $fornecedores->lastItem() }}
+                    </p>
                     <tbody>
                         @foreach ($fornecedores as $fornecedor )
                             <tr>
@@ -32,11 +36,12 @@
                                 <th>{{ $fornecedor->uf }}</th>
                                 <th>{{ $fornecedor->email }}</th>
                                 <th><a href="{{ route('app.fornecedor.editar', $fornecedor->id) }}">Editar</a></th>
-                                <th>excluir</th>
+                                <th><a href="{{ route('app.fornecedor.excluir', $fornecedor->id)}}">Excluir</a></th>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                {{ $fornecedores->appends($request_all)->links() }}
             </div>
         </div>
     </div>
