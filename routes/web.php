@@ -47,8 +47,8 @@ use App\Http\Middleware\LogAcessoMiddleware;
     # Controllers resource
     # Route::resource(/rota, controller)
     # index()   -> exibir lista de registros                    GET|HEAD    | app/produto
-    # store()   -> receber o formulario de criação              GET|HEAD    | app/produto/create
-    # create()  -> exibir formularuio de criação do registro    POST        | app/produto
+    # store()   -> receber o formulario de criação              GET|HEAD    | app/produto
+    # create()  -> exibir formularuio de criação do registro    POST        | app/produto/create
     # destroy() -> receber dados para remoção do registro       GET|HEAD    | app/produto/{produto}/edit
     # update()  -> receber o formulario de edição do registro   GET|HEAD    | app/produto/{produto}
     # show()    -> exibir registro especifico                   DELETE      | app/produto/{produto}

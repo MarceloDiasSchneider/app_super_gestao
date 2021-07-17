@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use App\Models\Unidade;
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ProdutoController extends Controller
 {
@@ -26,7 +28,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        return view('app.produto.create');
+        $unidades = Unidade::all();
+        return view('app.produto.create', compact('unidades'));
     }
 
     /**
@@ -37,7 +40,24 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regras = [
+            'nome' => 'required|min:3|max:100',
+            'descricao' => 'required|min:5|max:750',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id',
+        ];
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'Nome deve ter ao menos 3 caracteres',
+            'nome.max' => 'Nomo deve ter até 100 caracteres',
+            'descricao.min' => 'Descrição deve ao menos 5 caracteres',
+            'descricao.max' => 'Descrição deve ter até 750 caracteres',
+            'peso.integer' => 'O peso deve ser um valor inteiro',
+            'unidade_id.exists' => 'Esta unidade não é valida',
+        ];
+        $request->validate($regras, $feedback);
+        Produto::create($request->all());
+        return redirect()->route('produto.index');
     }
 
     /**
