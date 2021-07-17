@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MotivoContatoSeeder::class);
         $this->call(SiteContatoSeeder::class);
         $this->call(UnidadeSeeder::class);
+        $this->call(ProdutoSeeder::class);
 
         // chamando a class App/Models/SiteContato
         \App\Models\SiteContato::factory(10)->create();
