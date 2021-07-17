@@ -19,7 +19,7 @@ class AlteraTabelaSiteContatoAddFkMotivoContato extends Migration
             $table->unsignedBigInteger('motivo_contatos_id')->after('email');
         });
 
-        // // transportando os dados de motivo_contato para motivo_contatos_id
+        // transportando os dados de motivo_contato para motivo_contatos_id
         DB::statement('update site_contatos set motivo_contatos_id = motivo_contato');
 
         // criando a fk e removendo a coluna motivo_contato
