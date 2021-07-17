@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\MotivoContato;
 use Illuminate\Database\Seeder;
+use App\Models\MotivoContato;
 
 class MotivoContatoSeeder extends Seeder
 {

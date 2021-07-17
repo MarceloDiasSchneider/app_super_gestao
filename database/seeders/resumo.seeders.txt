@@ -22,4 +22,4 @@ $this->call(FornecedorSeeder::class); // chamando a class
 | semeando as classes definidas em DatabaseSeeder run()
 php artisan db:seed
 | semeando uma classe especifia
-php artisan db:seed --class SiteContatoSeeder
+php artisan db:seed --class NameSeeder

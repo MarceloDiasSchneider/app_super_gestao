@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\SiteContato;
 use Illuminate\Database\Seeder;
+use App\Models\SiteContato;
 
 class SiteContatoSeeder extends Seeder
 {
