@@ -10,7 +10,7 @@ use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParametrosController;
-use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Middleware\LogAcessoMiddleware;
 // use Illuminate\Validation\Rules\In;
 
@@ -42,6 +42,19 @@ use App\Http\Middleware\LogAcessoMiddleware;
     // Middleware sendo chamado na classe controladora com metodo contrutor
     // Middleware podem ser chamado em todas as rotas se definido em kernel protected $middlewareGroups
 */
+
+/*
+    # Controllers resource
+    # Route::resource(/rota, controller)
+    # index()   -> exibir lista de registros                    GET|HEAD    | app/produto
+    # store()   -> receber o formulario de criação              GET|HEAD    | app/produto/create
+    # create()  -> exibir formularuio de criação do registro    POST        | app/produto
+    # destroy() -> receber dados para remoção do registro       GET|HEAD    | app/produto/{produto}/edit
+    # update()  -> receber o formulario de edição do registro   GET|HEAD    | app/produto/{produto}
+    # show()    -> exibir registro especifico                   DELETE      | app/produto/{produto}
+    # edit()    -> exibir formulario de edição do registro      PUT|PATCH   | app/produto/{produto}
+*/
+
 Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
 Route::get('/sobre-nos', [SobrenosController::class, 'sobrenos'])->name('site.sobre-nos');
 
@@ -67,7 +80,7 @@ Route::middleware('autenticacao','log.acesso')->prefix('/app')->group( function 
     Route::get('/fornecedor/editar/{id}/{mensagem?}', [FornecedorController::class, 'editar'])->name('app.fornecedor.editar');
     Route::get('/fornecedor/excluir/{id}', [FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir');
 
-    Route::get('/produto', [ProdutosController::class, 'index'])->name('app.produto');
+    Route::resource('/produto', ProdutoController::class);
     Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
 });
 
