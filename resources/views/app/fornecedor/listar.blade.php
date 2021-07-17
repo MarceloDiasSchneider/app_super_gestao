@@ -41,7 +41,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $fornecedores->appends($request_all)->links() }}
+                {{ $fornecedores->appends($request->all())->links() }}
             </div>
         </div>
     </div>
