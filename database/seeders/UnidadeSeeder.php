@@ -17,5 +17,8 @@ class UnidadeSeeder extends Seeder
         Unidade::create(['unidade' => 't', 'descricao' => 'tonelada']);
         Unidade::create(['unidade' => 'kg', 'descricao' => 'kilogramo']);
         Unidade::create(['unidade' => 'g', 'descricao' => 'gramo']);
+        Unidade::create(['unidade' => 'cm', 'descricao' => 'centimetro']);
+        Unidade::create(['unidade' => 'm', 'descricao' => 'metro']);
+        Unidade::create(['unidade' => 'km', 'descricao' => 'quilometro']);
     }
 }
