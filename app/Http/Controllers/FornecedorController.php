@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
 {
-    public function index()
+    public function index( Request $request )
     {
-        $fornecedores = Fornecedor::all();
-        return view('app.fornecedor.index', compact('fornecedores'));
+        $fornecedores = Fornecedor::paginate(4);
+        return view('app.fornecedor.listar', compact('fornecedores', 'request'));
     }
 
     public function listar(Request $request)
