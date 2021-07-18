@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProdutoDetalhe;
+// use App\Models\ItemDetalhe;
 use App\Models\Produto;
 use App\Models\Unidade;
 
@@ -97,6 +98,25 @@ class ProdutoDetalheController extends Controller
         $unidades = Unidade::all();
         return view('app.produto_detalhe.edit', compact('produtos', 'produto_detalhe', 'unidades'));
     }
+
+    // utilizando model ItemDetalhe que não tem uma padronização como define a conveção do Laravel na nominação das trables e nos seus relacionamentos.
+    // public function edit($id)
+    // {
+    //     $produto_detalhe = ItemDetalhe::find($id);
+    //     // recuperando todos os ProdutosDetalhes
+    //     $produto_detalhes = ProdutoDetalhe::all();
+    //     // removendo os produtos que já possuem ProdutoDetalhe
+    //     $produto_id_ignorado = [];
+    //     foreach ($produto_detalhes as $detalhe) {
+    //         // exceto o produto em edição
+    //         if($produto_detalhe->produto_id != $detalhe->produto_id) {
+    //             $produto_id_ignorado[] = $detalhe->produto_id;
+    //         }
+    //     }
+    //     $produtos = Produto::whereNotIn('id', $produto_id_ignorado)->get();
+    //     $unidades = Unidade::all();
+    //     return view('app.produto_detalhe.edit', compact('produtos', 'produto_detalhe', 'unidades'));
+    // }
 
     /**
      * Update the specified resource in storage.

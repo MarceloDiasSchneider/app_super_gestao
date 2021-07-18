@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produto;
 use App\Models\ProdutoDetalhe;
+// use App\Models\Item;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,8 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         $produtos = Produto::paginate(10);
+        // utilizando model Item que não tem uma padronização como define a conveção do Laravel na nominação das trables e nos seus relacionamentos.
+        // $produtos = Item::paginate(10);
         return view('app.produto.index', compact('produtos', 'request'));
     }
 
