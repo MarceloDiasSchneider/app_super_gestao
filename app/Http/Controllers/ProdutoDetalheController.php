@@ -16,7 +16,7 @@ class ProdutoDetalheController extends Controller
      */
     public function index()
     {
-        //
+        echo 'index';
     }
 
     /**
@@ -39,6 +39,20 @@ class ProdutoDetalheController extends Controller
      */
     public function store(Request $request)
     {
+        $regras = [
+            'produto_id' => 'exists:produtos,id',
+            'comprimento' => 'required|integer',
+            'largura' => 'required|integer',
+            'altura' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id',
+        ];
+        $feedback = [
+            'produto_id.exists' => 'Este produto não é valido',
+            'required' => 'O campo :attribute deve ser preenchido',
+            'integer' => 'O :attribute deve ser um valor inteiro',
+            'unidade_id.exists' => 'Esta unidade não é valida',
+        ];
+        $request->validate($regras, $feedback);
         ProdutoDetalhe::create($request->all());
         return redirect()->route('produto.index');
     }
@@ -46,45 +60,62 @@ class ProdutoDetalheController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\ProdutoDetalhe  $produto_detalhe
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($produto_detalhe)
     {
-        //
+        echo 'show';
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\ProdutoDetalhe  $produto_detalhe
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProdutoDetalhe $produto_detalhe)
     {
-        //
+        $produtos = Produto::all();
+        $unidades = Unidade::all();
+        return view('app.produto_detalhe.edit', compact('produtos', 'produto_detalhe', 'unidades'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\ProdutoDetalhe  $produto_detalhe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,ProdutoDetalhe $produto_detalhe)
     {
-        //
+        $regras = [
+            'produto_id' => 'exists:produtos,id',
+            'comprimento' => 'required|integer',
+            'largura' => 'required|integer',
+            'altura' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id',
+        ];
+        $feedback = [
+            'produto_id.exists' => 'Este produto não é valido',
+            'required' => 'O campo :attribute deve ser preenchido',
+            'integer' => 'O :attribute deve ser um valor inteiro',
+            'unidade_id.exists' => 'Esta unidade não é valida',
+        ];
+        $request->validate($regras, $feedback);
+        $produto_detalhe->update($request->all());
+        return redirect()->route('produto.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\ProdutoDetalhe  $produto_detalhe
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($produto_detalhe)
     {
-        //
+        echo 'delete';
     }
 }
