@@ -43,6 +43,21 @@
                             <td>Unidade de medida</td>
                             <td>{{ $produto->produto_detalhe->unidade->unidade . ' - ' . $produto->produto_detalhe->unidade->descricao }}</td>
                         </tr>
+                        <tr>
+                            <td>Editar detalhe do produto</td>
+                            <th><a href="{{ route('produto-detalhe.edit', $produto->produto_detalhe->id) }}">Editar</a></th>
+                            {{-- <td>
+                                <form id="from_{{ $$produto->produto_detalhe-> }}" method="post" action="{{ route('produto-detalhe.destroy'), $$produto->produto_detalhe->}}">
+                                    @csrf
+                                    @method('DELETE')
+
+                            </td> --}}
+                        </tr>
+                    @else
+                        <tr>
+                            <td>Adicionar detalhe do produto</td>
+                            <th><a href="{{ route('produto-detalhe.create', $produto->id) }}">Adicionar</a></th>
+                        </tr>
                     @endif
                 </table>
             </div>

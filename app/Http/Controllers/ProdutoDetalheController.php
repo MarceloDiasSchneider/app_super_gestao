@@ -26,7 +26,14 @@ class ProdutoDetalheController extends Controller
      */
     public function create()
     {
-        $produtos = Produto::all();
+        // recuperando todos os ProdutosDetalhes
+        $produto_detalhes = ProdutoDetalhe::all();
+        // removendo os produtos que já possuem ProdutoDetalhe
+        $produto_id_ignorado = [];
+        foreach ($produto_detalhes as $detalhe) {
+            $produto_id_ignorado[] = $detalhe->produto_id;
+        }
+        $produtos = Produto::whereNotIn('id', $produto_id_ignorado)->get();
         $unidades = Unidade::all();
         return view('app.produto_detalhe.create', compact('produtos', 'unidades'));
     }
@@ -76,7 +83,17 @@ class ProdutoDetalheController extends Controller
      */
     public function edit(ProdutoDetalhe $produto_detalhe)
     {
-        $produtos = Produto::all();
+        // recuperando todos os ProdutosDetalhes
+        $produto_detalhes = ProdutoDetalhe::all();
+        // removendo os produtos que já possuem ProdutoDetalhe
+        $produto_id_ignorado = [];
+        foreach ($produto_detalhes as $detalhe) {
+            // exceto o produto em edição
+            if($produto_detalhe->produto_id != $detalhe->produto_id) {
+                $produto_id_ignorado[] = $detalhe->produto_id;
+            }
+        }
+        $produtos = Produto::whereNotIn('id', $produto_id_ignorado)->get();
         $unidades = Unidade::all();
         return view('app.produto_detalhe.edit', compact('produtos', 'produto_detalhe', 'unidades'));
     }

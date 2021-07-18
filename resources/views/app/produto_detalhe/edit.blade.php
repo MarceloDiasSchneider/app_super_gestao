@@ -11,6 +11,8 @@
         @endcomponent --}}
         <div class="informacao-pagina">
             <div style="max-width: 550px; margin: auto;">
+                <p> Produto original: {{ $produto_detalhe->produto->nome }} </p>
+                <p> Descrição: {{ $produto_detalhe->produto->descricao }} </p>
                 @component('app.produto_detalhe._components.from_create_edit', compact('produtos', 'produto_detalhe', 'unidades'))
                 @endcomponent
             </div>
