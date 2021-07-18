@@ -13,6 +13,12 @@ class FornecedorController extends Controller
         return view('app.fornecedor.listar', compact('fornecedores', 'request'));
     }
 
+    public function pesquisar()
+    {
+        $fornecedores = Fornecedor::all();
+        return view('app.fornecedor.pesquisar', compact('fornecedores'));
+    }
+
     public function listar(Request $request)
     {
         $fornecedores = Fornecedor::where('nome', 'like', '%'.$request->nome.'%' )
