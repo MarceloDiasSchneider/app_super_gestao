@@ -24,20 +24,24 @@
                     </tr>
                     <tr>
                         <td>Peso</td>
-                        <td>{{ $produto->peso . ' ' . $unidades[$produto->unidade_id]}}</td>
+                        <td>{{ $produto->peso . ' ' . $produto->unidade->unidade}}</td>
                     </tr>
-                    @if (isset($produto_detalhe[0]))
+                    @if (isset($produto->produto_detalhe))
                         <tr>
                             <td>Comprimento</td>
-                            <td>{{ $produto_detalhe[0]['comprimento'] . ' ' . $unidades[$produto_detalhe[0]['unidade_id']] }}</td>
+                            <td>{{ $produto->produto_detalhe->comprimento . ' ' . $produto->produto_detalhe->unidade->unidade }}</td>
                         </tr>
                         <tr>
                             <td>Largura</td>
-                            <td>{{ $produto_detalhe[0]['largura'] . ' ' . $unidades[$produto_detalhe[0]['unidade_id']] }}</td>
+                            <td>{{ $produto->produto_detalhe->largura . ' ' . $produto->produto_detalhe->unidade->unidade }}</td>
                         </tr>
                         <tr>
                             <td>Altura</td>
-                            <td>{{ $produto_detalhe[0]['altura'] . ' ' . $unidades[$produto_detalhe[0]['unidade_id']] }}</td>
+                            <td>{{ $produto->produto_detalhe->altura . ' ' . $produto->produto_detalhe->unidade->unidade }}</td>
+                        </tr>
+                        <tr>
+                            <td>Unidade de medida</td>
+                            <td>{{ $produto->produto_detalhe->unidade->unidade . ' - ' . $produto->produto_detalhe->unidade->descricao }}</td>
                         </tr>
                     @endif
                 </table>

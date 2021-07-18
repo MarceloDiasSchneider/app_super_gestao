@@ -19,6 +19,7 @@
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Peso|Unidade</th>
+                            <th>Dimenção <span title="comprimento x largura x altura">&ii;</span></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -34,6 +35,16 @@
                                 <th>{{ $produto->nome }}</th>
                                 <th>{{ $produto->descricao }}</th>
                                 <th>{{ $produto->peso . ' ' . $unidades[$produto->unidade_id]}}</th>
+                                @if (isset($produto->produto_detalhe))
+                                    <th>{{
+                                        $produto->produto_detalhe->comprimento . 'x' .
+                                        $produto->produto_detalhe->largura . 'x' .
+                                        $produto->produto_detalhe->altura . ' ' .
+                                        $produto->produto_detalhe->unidade->unidade
+                                    }}</th>
+                                @else
+                                    <th></th>
+                                @endif
                                 <th><a href="{{ route('produto.show', $produto->id) }}">Visualizar</a></th>
                                 <th><a href="{{ route('produto.edit', $produto->id) }}">Editar</a></th>
                                 <th>
