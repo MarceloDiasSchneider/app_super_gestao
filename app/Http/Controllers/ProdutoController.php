@@ -6,7 +6,6 @@ use App\Models\Produto;
 use App\Models\ProdutoDetalhe;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ProdutoController extends Controller
 {
@@ -17,10 +16,8 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        $unidades = Unidade::all()->toArray();
-        $unidades = array_column($unidades, 'unidade', 'id');
         $produtos = Produto::paginate(10);
-        return view('app.produto.index', compact('produtos', 'request', 'unidades'));
+        return view('app.produto.index', compact('produtos', 'request'));
     }
 
     /**

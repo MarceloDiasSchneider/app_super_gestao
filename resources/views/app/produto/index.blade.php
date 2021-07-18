@@ -34,7 +34,7 @@
                             <tr>
                                 <th>{{ $produto->nome }}</th>
                                 <th>{{ $produto->descricao }}</th>
-                                <th>{{ $produto->peso . ' ' . $unidades[$produto->unidade_id]}}</th>
+                                <th>{{ $produto->peso . ' ' . $produto->unidade->unidade}}</th>
                                 @if (isset($produto->produto_detalhe))
                                     <th>{{
                                         $produto->produto_detalhe->comprimento . 'x' .
