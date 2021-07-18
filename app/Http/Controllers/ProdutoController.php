@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use App\Models\ProdutoDetalhe;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -72,9 +73,10 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
+        $produto_detalhe = ProdutoDetalhe::where('produto_id', $produto->id)->get()->toArray();
         $unidades = Unidade::all()->toArray();
         $unidades = array_column($unidades, 'unidade', 'id');
-        return view('app.produto.show', compact('produto', 'unidades'));
+        return view('app.produto.show', compact('produto', 'produto_detalhe', 'unidades'));
     }
 
     /**
