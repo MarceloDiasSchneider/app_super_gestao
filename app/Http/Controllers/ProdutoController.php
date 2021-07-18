@@ -30,7 +30,10 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
+        # views create e edit com form como component
         return view('app.produto.create', compact('unidades'));
+        # view de create e edit unificadas
+        // return view('app.produto.create_edit', compact('unidades'));
     }
 
     /**
@@ -83,7 +86,11 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidades = Unidade::all();
+        # views create e edit com form como component
         return view('app.produto.edit', compact('produto', 'unidades'));
+        # view de create e edit unificadas
+        // return view('app.produto.create_edit', compact('produto', 'unidades'));
+
     }
 
     /**
