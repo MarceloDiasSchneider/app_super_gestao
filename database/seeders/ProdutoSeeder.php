@@ -13,8 +13,9 @@ class ProdutoSeeder extends Seeder
      */
     public function run()
     {
-        Produto::create(['nome' => 'Geladeira', 'descricao' => 'Uma geladeira', 'peso' => '60', 'unidade_id' => '2']);
-        Produto::create(['nome' => 'Ar Condicionado', 'descricao' => 'Um ar condicionado', 'peso' => '17', 'unidade_id' => '2']);
-        Produto::create(['nome' => 'Bicicleta', 'descricao' => 'Uma bicicleta', 'peso' => '7', 'unidade_id' => '2']);
+        Produto::create([ 'fornecedor_id' => 1,'nome' => 'Geladeira', 'descricao' => 'Uma geladeira', 'peso' => '60', 'unidade_id' => '2']);
+        Produto::create([ 'fornecedor_id' => 1,'nome' => 'Ar Condicionado', 'descricao' => 'Um ar condicionado', 'peso' => '17', 'unidade_id' => '2']);
+        Produto::create([ 'fornecedor_id' => 2,'nome' => 'Bicicleta', 'descricao' => 'Uma bicicleta', 'peso' => '7', 'unidade_id' => '2']);
+        Produto::create([ 'fornecedor_id' => 3,'nome' => 'Televisor', 'descricao' => 'Um televiser', 'peso' => '3500', 'unidade_id' => '3']);
     }
 }
