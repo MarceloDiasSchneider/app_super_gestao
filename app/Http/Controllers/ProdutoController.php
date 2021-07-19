@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
-use App\Models\ProdutoDetalhe;
 // use App\Models\Item;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
@@ -18,7 +17,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         // with(['produto_detalhe']) = "eager loading" = carregando produto detalhe junto com a chamada do produto
-        $produtos = Produto::with(['produto_detalhe'])->paginate(10);
+        $produtos = Produto::with(['produto_detalhe', 'fornecedor'])->paginate(10);
         // lazy loading = carregamento de produto detalhe somente acontece ao accesarmos o metodo -> produto_detalhe
         // $produtos = Produto::paginate(10);
         // utilizando model Item que não tem uma padronização como define a conveção do Laravel na nominação das trables e nos seus relacionamentos.

@@ -15,6 +15,13 @@
             <div style="max-width: 550px; margin: auto;">
                 <table border="1" style="text-align: left; min-width: 350px;">
                     <tr >
+                        <td>Fornecedor</td>
+                        <td>{{ $produto->fornecedor->nome }}</td>
+                        <td><a href="{{ route('app.fornecedor.listar', [ 'nome' => $produto->fornecedor->nome]) }}">Visualizar</a></td>
+                    </tr>
+                </table>
+                <table border="1" style="text-align: left; min-width: 350px;">
+                    <tr >
                         <td>ID</td>
                         <td>{{ $produto->id }}</td>
                     </tr>

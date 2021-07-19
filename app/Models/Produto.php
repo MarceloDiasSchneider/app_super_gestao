@@ -22,4 +22,9 @@ class Produto extends Model
     {
         return  $this->belongsTo('App\Models\Unidade');
     }
+
+    public function fornecedor()
+    {
+        return $this->belongsTo('App\Models\Fornecedor');
+    }
 }
