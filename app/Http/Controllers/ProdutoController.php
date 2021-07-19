@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fornecedor;
 use App\Models\Produto;
 // use App\Models\Item;
 use App\Models\Unidade;
@@ -32,9 +33,10 @@ class ProdutoController extends Controller
      */
     public function create()
     {
+        $fornecedores = Fornecedor::all();
         $unidades = Unidade::all();
         # views create e edit com form como component
-        return view('app.produto.create', compact('unidades'));
+        return view('app.produto.create', compact('unidades', 'fornecedores'));
         # view de create e edit unificadas
         // return view('app.produto.create_edit', compact('unidades'));
     }
@@ -48,6 +50,7 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $regras = [
+            'fornecedor_id' => 'exists:fornecedores,id',
             'nome' => 'required|min:3|max:100',
             'descricao' => 'required|min:5|max:750',
             'peso' => 'required|integer',
@@ -55,6 +58,7 @@ class ProdutoController extends Controller
         ];
         $feedback = [
             'required' => 'O campo :attribute deve ser preenchido',
+            'fornecedor_id.exists' => 'Este fornecedor não é valido',
             'nome.min' => 'Nome deve ter ao menos 3 caracteres',
             'nome.max' => 'Nomo deve ter até 100 caracteres',
             'descricao.min' => 'Descrição deve ao menos 5 caracteres',
@@ -90,9 +94,10 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
+        $fornecedores = Fornecedor::all();
         $unidades = Unidade::all();
         # views create e edit com form como component
-        return view('app.produto.edit', compact('produto', 'unidades'));
+        return view('app.produto.edit', compact('produto', 'fornecedores', 'unidades'));
         # view de create e edit unificadas
         // return view('app.produto.create_edit', compact('produto', 'unidades'));
 

@@ -38,6 +38,38 @@
                                 <th><a href="{{ route('app.fornecedor.editar', $fornecedor->id) }}">Editar</a></th>
                                 <th><a href="{{ route('app.fornecedor.excluir', $fornecedor->id)}}">Excluir</a></th>
                             </tr>
+                            @foreach ($fornecedor->produtos as $produto )
+                                @if ($loop->first)
+                                    <th colspan="6">Produtos relacionados
+                                        <table border="1" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Descricao</th>
+                                                    <th>Peso</th>
+                                                    <th>Dimenção</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                @endif
+                                                <tr>
+                                                    <th>{{ $produto->nome }}</th>
+                                                    <th>{{ $produto->descricao }}</th>
+                                                    <th>{{ $produto->peso . ' ' . $produto->unidade->unidade }}</th>
+                                                    @if (isset($produto->produto_detalhe))
+                                                        <th>{{
+                                                            $produto->produto_detalhe->comprimento . 'x' .
+                                                            $produto->produto_detalhe->largura . 'x' .
+                                                            $produto->produto_detalhe->altura . ' ' .
+                                                            $produto->produto_detalhe->unidade->unidade
+                                                        }}</th>
+                                                    @endif
+                                                </tr>
+                                    @if ($loop->last)
+                                            </tbody>
+                                        </table>
+                                    @endif
+                            @endforeach
                         @endforeach
                     </tbody>
                 </table>

@@ -13,7 +13,7 @@
 
         <div class="informacao-pagina">
             <div style="max-width: 550px; margin: auto;">
-                @component('app.produto._components.from_create_edit', compact('produto', 'unidades'))
+                @component('app.produto._components.from_create_edit', compact('produto', 'fornecedores', 'unidades'))
                 @endcomponent
             </div>
         </div>
