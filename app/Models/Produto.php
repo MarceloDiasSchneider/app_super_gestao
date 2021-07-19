@@ -11,7 +11,7 @@ class Produto extends Model
     use SoftDeletes;
     use HasFactory;
 
-    protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id'];
+    protected $fillable = ['fornecedor_id', 'nome', 'descricao', 'peso', 'unidade_id'];
 
     public function produto_detalhe()
     {
