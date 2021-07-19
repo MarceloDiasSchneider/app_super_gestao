@@ -113,6 +113,7 @@ class ProdutoController extends Controller
     public function update(Request $request, Produto $produto)
     {
         $regras = [
+            'fornecedor_id' => 'exists:fornecedores,id',
             'nome' => 'required|min:3|max:100',
             'descricao' => 'required|min:5|max:750',
             'peso' => 'required|integer',
@@ -120,6 +121,7 @@ class ProdutoController extends Controller
         ];
         $feedback = [
             'required' => 'O campo :attribute deve ser preenchido',
+            'fornecedor_id.exists' => 'Este fornecedor não é valido',
             'nome.min' => 'Nome deve ter ao menos 3 caracteres',
             'nome.max' => 'Nomo deve ter até 100 caracteres',
             'descricao.min' => 'Descrição deve ao menos 5 caracteres',
