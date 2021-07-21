@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobrenosController;
@@ -12,7 +11,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParametrosController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutoDetalheController;
-use App\Http\Middleware\LogAcessoMiddleware;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
+
 // use Illuminate\Validation\Rules\In;
 
 /*
@@ -70,7 +72,6 @@ Route::post('/login', [LoginController::class, 'autenticar'])->name('site.login'
 # agrupando rotes
 Route::middleware('autenticacao','log.acesso')->prefix('/app')->group( function () {
     Route::get('/home', [HomeController::class, 'index'])->name('app.home');
-    Route::get('/cliente', [ClienteController::class, 'index'])->name('app.cliente');
 
     # fornecedor
     Route::get('/fornecedor', [FornecedorController::class, 'index'])->name('app.fornecedor');
@@ -82,6 +83,9 @@ Route::middleware('autenticacao','log.acesso')->prefix('/app')->group( function 
     Route::get('/fornecedor/editar/{id}/{mensagem?}', [FornecedorController::class, 'editar'])->name('app.fornecedor.editar');
     Route::get('/fornecedor/excluir/{id}', [FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir');
 
+    Route::resource('/cliente', ClienteController::class);
+    Route::resource('/pedido', PedidoController::class);
+    Route::resource('/pedido-produto', PedidoProdutoController::class);
     Route::resource('/produto', ProdutoController::class);
     Route::resource('/produto-detalhe', ProdutoDetalheController::class);
     Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
