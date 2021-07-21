@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Pedido;
+use App\Models\Cliente;
+use App\Models\Produto;
 class PedidoController extends Controller
 {
     /**
@@ -11,9 +13,10 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $pedidos = Pedido::paginate(10);
+        return view('app.pedido.listar', compact('pedidos', 'request'));
     }
 
     /**
@@ -23,7 +26,8 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = Cliente::all();
+        return view('app.pedido.create', compact('clientes'));
     }
 
     /**
@@ -34,51 +38,69 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regras = [
+            'cliente_id' => 'exists:clientes,id'
+        ];
+        $feedback = [
+            'cliente_id.exists' => 'Este cliente não é valido',
+        ];
+        $request->validate($regras, $feedback);
+        Pedido::create($request->all());
+        return redirect()->route('pedido.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Models\Pedido $pedido
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pedido $pedido)
     {
-        //
+        return view('app.pedido.show', compact('pedido'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Models\Pedido $pedido
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pedido $pedido)
     {
-        //
+        $clientes = Cliente::all();
+        return view('app.pedido.edit', compact('pedido', 'clientes'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Models\Pedido $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pedido $pedido)
     {
-        //
+        $regras = [
+            'cliente_id' => 'exists:clientes,id'
+        ];
+        $feedback = [
+            'cliente_id.exists' => 'Este cliente não é valido',
+        ];
+        $request->validate($regras, $feedback);
+        $pedido->update($request->all());
+        return redirect()->route('pedido.show', $pedido->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Models\Pedido $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pedido $pedido)
     {
-        //
+        $pedido->delete();
+        return redirect()->route('pedido.index');
     }
 }
