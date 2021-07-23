@@ -13,7 +13,7 @@
 
         <div class="informacao-pagina">
             <div style="max-width: 550px; margin: auto;">
-                <table border="1" style="text-align: left; min-width: 350px;">
+                <table border="1" style="text-align: left; width: 100%; min-width: 350px;">
                     <tr >
                         <td>ID</td>
                         <td>{{ $pedido->id }}</td>
@@ -22,10 +22,18 @@
                         <td>Cliente</td>
                         <td>{{ $pedido->cliente->nome }}</td>
                     </tr>
+                </table>
+                <table border="1" style="text-align: left; width: 100%; min-width: 350px;">
+                    <tr>
+                            <td>Produto</td>
+                            <td>Adicionado em</td>
+                            <td>Ver pedido</td>
+                    </tr>
                     @foreach ($pedido->produtos_do_pedido as $produto)
                         <tr>
-                            <td>Produto</td>
                             <td>{{ $produto->nome }}</td>
+                            <td>{{ $produto->pivot->created_at }}</td>
+                            <td><a href="{{ route('produto.show', compact('produto')) }}">{{ $produto->id }}</a></td>
                         </tr>
                     @endforeach
                 </table>

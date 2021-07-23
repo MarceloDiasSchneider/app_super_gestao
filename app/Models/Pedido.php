@@ -19,9 +19,9 @@ class Pedido extends Model
     public function produtos_do_pedido()
     {
         // relacionamento n para n com nome padronizado pelo framework laravel
-        return $this->belongsToMany('App\Models\Produto', 'pedido_produtos');
+        return $this->belongsToMany('App\Models\Produto', 'pedido_produtos')->withPivot('created_at');
 
         // relacionamento n para n com nome não padronizado pelo framework laravel
-        return $this->belongsToMany('App\Models\Item', 'pedido_produtos', 'pedido_id', 'produto_id');
+        // return $this->belongsToMany('App\Models\Item', 'pedido_produtos', 'pedido_id', 'produto_id');
     }
 }

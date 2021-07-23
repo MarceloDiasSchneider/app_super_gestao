@@ -67,6 +67,14 @@
                         </tr>
                     @endif
                 </table>
+                <table border="1" style="text-align: left; min-width: 350px;">
+                    @foreach ($produto->pedidos_do_produto as $pedido)
+                        <tr>
+                            <td>Pedido</td>
+                            <td><a href="{{ route('pedido.show', compact('pedido') ) }}">{{ $pedido->id}}</a></td>
+                        </tr>
+                    @endforeach
+                </table>
             </div>
         </div>
     </div>
