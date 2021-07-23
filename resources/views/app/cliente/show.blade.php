@@ -13,7 +13,7 @@
 
         <div class="informacao-pagina">
             <div style="max-width: 550px; margin: auto;">
-                <table border="1" style="text-align: left; min-width: 350px;">
+                <table border="1" style="text-align: left; width: 100%; min-width: 350px;">
                     <tr >
                         <td>ID</td>
                         <td>{{ $cliente->id }}</td>
@@ -22,6 +22,14 @@
                         <td>Nome</td>
                         <td>{{ $cliente->nome }}</td>
                     </tr>
+                </table>
+                <table border="1" style="text-align: left; width: 100%; min-width: 350px;">
+                    @foreach ($cliente->pedidos_do_cliente as $pedido)
+                        <tr>
+                            <td>Pedido</td>
+                            <td><a href="{{ route('pedido.show', compact('pedido')) }}">{{ $pedido->id }}</a></td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
         </div>

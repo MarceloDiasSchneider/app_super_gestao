@@ -16,11 +16,12 @@
                 <table border="1" style="text-align: left; width: 100%; min-width: 350px;">
                     <tr >
                         <td>ID</td>
-                        <td>{{ $pedido->id }}</td>
+                        <td colspan="2">{{ $pedido->id }}</td>
                     </tr>
                     <tr>
                         <td>Cliente</td>
                         <td>{{ $pedido->cliente->nome }}</td>
+                        <td><a href="{{ route('cliente.show', ['cliente' => $pedido->cliente]) }}">{{ $pedido->cliente->id }}</a></td>
                     </tr>
                 </table>
                 <table border="1" style="text-align: left; width: 100%; min-width: 350px;">
@@ -32,7 +33,7 @@
                     @foreach ($pedido->produtos_do_pedido as $produto)
                         <tr>
                             <td>{{ $produto->nome }}</td>
-                            <td>{{ $produto->pivot->created_at }}</td>
+                            <td>{{ $produto->pivot->created_at->format('d/m/Y') }}</td>
                             <td><a href="{{ route('produto.show', compact('produto')) }}">{{ $produto->id }}</a></td>
                         </tr>
                     @endforeach
