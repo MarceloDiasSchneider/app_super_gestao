@@ -20,9 +20,17 @@
                     </tr>
                     <tr>
                         <td>Cliente</td>
-                        <td>{{ $pedido->cliente_id }}</td>
+                        <td>{{ $pedido->cliente->nome }}</td>
                     </tr>
+                    @foreach ($pedido->produtos_do_pedido as $produto)
+                        <tr>
+                            <td>Produto</td>
+                            <td>{{ $produto->nome }}</td>
+                        </tr>
+                    @endforeach
                 </table>
+                @component('app.pedido._components.from_create_produto-pedido', compact('pedido', 'produtos'))
+                @endcomponent
             </div>
         </div>
     </div>

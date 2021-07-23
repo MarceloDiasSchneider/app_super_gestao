@@ -83,11 +83,13 @@ Route::middleware('autenticacao','log.acesso')->prefix('/app')->group( function 
     Route::get('/fornecedor/editar/{id}/{mensagem?}', [FornecedorController::class, 'editar'])->name('app.fornecedor.editar');
     Route::get('/fornecedor/excluir/{id}', [FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir');
 
-    Route::resource('/cliente', ClienteController::class);
-    Route::resource('/pedido', PedidoController::class);
-    Route::resource('/pedido-produto', PedidoProdutoController::class);
-    Route::resource('/produto', ProdutoController::class);
+    Route::resource('cliente', ClienteController::class);
+    Route::resource('pedido', PedidoController::class);
+    Route::resource('produto', ProdutoController::class);
     Route::resource('/produto-detalhe', ProdutoDetalheController::class);
+    // Route::resource('/pedido-produto', PedidoProdutoController::class);
+
+    Route::post('/pedido-produto/store/{pedido}', [PedidoProdutoController::class, 'store'])->name('pedido-produto.store');
     Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
 });
 

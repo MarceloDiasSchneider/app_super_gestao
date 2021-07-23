@@ -57,7 +57,8 @@ class PedidoController extends Controller
      */
     public function show(Pedido $pedido)
     {
-        return view('app.pedido.show', compact('pedido'));
+        $produtos = Produto::all();
+        return view('app.pedido.show', compact('pedido', 'produtos'));
     }
 
     /**
