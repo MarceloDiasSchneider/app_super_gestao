@@ -70,8 +70,17 @@
                 <table border="1" style="text-align: left; min-width: 350px;">
                     @foreach ($produto->pedidos_do_produto as $pedido)
                         <tr>
+                            <td>{{ $pedido->pivot->id }}</td>
                             <td>Pedido</td>
-                            <td><a href="{{ route('pedido.show', compact('pedido') ) }}">{{ $pedido->id}}</a></td>
+                            <td>Quantidade {{ $pedido->pivot->quantidade }}</td>
+                            <td><a href="{{ route('pedido.show', compact('pedido') ) }}">Ver pedido {{ $pedido->id }}</a></td>
+                            <td>
+                                <form id="from_{{ $pedido->pivot->id }}" method="post" action="{{ route('pedido-produto.destroy', $pedido->pivot->id)}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="#" onclick="document.querySelector('#from_{{ $pedido->pivot->id }}').submit()">Excluir</a>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </table>

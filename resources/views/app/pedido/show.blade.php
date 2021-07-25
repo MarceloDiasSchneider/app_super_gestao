@@ -29,14 +29,22 @@
                             <td>Produto</td>
                             <td>Quantidade</td>
                             <td>Adicionado em</td>
-                            <td>Ver pedido</td>
+                            <td></td>
+                            <td></td>
                     </tr>
                     @foreach ($pedido->produtos_do_pedido as $produto)
                         <tr>
                             <td>{{ $produto->nome }}</td>
                             <td>{{ $produto->pivot->quantidade }}</td>
                             <td>{{ $produto->pivot->created_at->format('d/m/Y') }}</td>
-                            <td><a href="{{ route('produto.show', compact('produto')) }}">{{ $produto->id }}</a></td>
+                            <td><a href="{{ route('produto.show', compact('produto')) }}">Ver produto</a></td>
+                            <td>
+                                <form id="from_{{ $produto->pivot->id }}" method="post" action="{{ route('pedido-produto.destroy', $produto->pivot->id)}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="#" onclick="document.querySelector('#from_{{ $produto->pivot->id }}').submit()">Excluir</a>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </table>

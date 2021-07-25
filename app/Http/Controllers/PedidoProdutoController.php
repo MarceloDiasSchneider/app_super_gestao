@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Produto;
 use App\Models\PedidoProduto;
 
 class PedidoProdutoController extends Controller
@@ -104,11 +105,30 @@ class PedidoProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Pedido  $pedido
+     * @param  \Illuminate\Http\Produto  $produto
+     * @param  \Illuminate\Http\PedidoProduto  $pedido_produto
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    // public function destroy(Pedido $pedido, Produto $produto)
+    public function destroy(PedidoProduto $pedido_produto)
     {
-        //
+        // ## removendo os registro com o metodo tradicional, acessando a Model com ids de pedido e produto
+        // PedidoProduto::where([
+        //     'pedido_id' => $pedido->id,
+        //     'produto_id' => $produto->id,
+        // ])->delete();
+
+        // ## removendo os registros com o metodo detach com ids de pedido e produto
+        // utilizando a estancia do pedido com o metodo produtos_do_pedido
+        // $pedido->id é definido pela instancia do $pedido
+        // $pedido->produtos_do_pedido()->detach($produto->id);
+        // utilizando a estancia do produto com o metodo pedidos_do_produto
+        // $produto->id é definido pela instancia do $produto
+        // $produto->pedidos_do_produto()->detach($pedido->id);
+
+        // ## removendo to registro pelo seu id
+        $pedido_produto->delete();
+        return redirect()->back();
     }
 }

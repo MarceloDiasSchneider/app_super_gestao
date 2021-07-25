@@ -90,6 +90,10 @@ Route::middleware('autenticacao','log.acesso')->prefix('/app')->group( function 
     // Route::resource('/pedido-produto', PedidoProdutoController::class);
 
     Route::post('/pedido-produto/store/{pedido}', [PedidoProdutoController::class, 'store'])->name('pedido-produto.store');
+    // rota recebendo os ids de pedido e produto
+    // Route::delete('/pedido-produto/destroy/{pedido}/{produto}', [PedidoProdutoController::class, 'destroy'])->name('pedido-produto.destroy');
+    // rota recebendo os id de pedido_produto
+    Route::delete('/pedido-produto/destroy/{pedido_produto}', [PedidoProdutoController::class, 'destroy'])->name('pedido-produto.destroy');
     Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
 });
 

@@ -45,8 +45,8 @@ class PedidoController extends Controller
             'cliente_id.exists' => 'Este cliente não é valido',
         ];
         $request->validate($regras, $feedback);
-        Pedido::create($request->all());
-        return redirect()->route('pedido.index');
+        $pedido = Pedido::create($request->all());
+        return redirect()->route('pedido.show', $pedido->id);
     }
 
     /**
