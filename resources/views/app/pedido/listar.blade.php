@@ -29,7 +29,7 @@
                         @foreach ($pedidos as $pedido )
                             <tr>
                                 <th>{{ $pedido->id }}</th>
-                                <th>{{ $pedido->cliente_id }}</th>
+                                <th>{{ $pedido->cliente->nome }}</th>
                                 <th><a href="{{ route('pedido.show', $pedido->id) }}">Visualizar</a></th>
                                 <th><a href="{{ route('pedido.edit', $pedido->id) }}">Editar</a></th>
                                 <th>

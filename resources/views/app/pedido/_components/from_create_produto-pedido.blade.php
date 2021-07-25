@@ -7,5 +7,7 @@
         @endforeach
     <select>
     {{ $errors->has('produto_id') ? $errors->first('produto_id') : '' }}
+    <input type="number" name="quantidade" placeholder="Quantidade" class="borda-preta" value="{{ old('quantidade') }}">
+    {{ $errors->has('quantidade') ? $errors->first('quantidade') : '' }}
     <button type="submit" class="borda-preta">Cadastrar</button>
 </form>

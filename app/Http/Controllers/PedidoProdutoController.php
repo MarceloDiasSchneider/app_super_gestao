@@ -38,16 +38,32 @@ class PedidoProdutoController extends Controller
     public function store(Request $request, Pedido $pedido)
     {
         $regras = [
-            'produto_id' => 'exists:produtos,id'
+            'produto_id' => 'exists:produtos,id',
+            'quantidade' => 'required'
         ];
         $feedback = [
-            'produto_id.exists' => 'Este produto não é valido'
+            'produto_id.exists' => 'Este produto não é valido',
+            'quantidade.required' => 'A quantidade deve ser informada'
         ];
         $request->validate($regras, $feedback);
-        PedidoProduto::create([
-            'pedido_id' => $pedido->id,
-            'produto_id' => $request->get('produto_id')
+        // inserindo o registro com um metodo tradicional
+        // PedidoProduto::create([
+        //     'pedido_id' => $pedido->id,
+        //     'produto_id' => $request->get('produto_id'),
+        //     'quantidade' => $request->get('quantidade')
+        // ]);
+
+        // inserindo o registro atravez do metodo attach do realacionamento N x N de forma unitaria
+        // $pedido->produtos_do_pedido()->attach($request->get('produto_id'), [
+        //     'quantidade' => $request->get('quantidade')
+        // ]);
+        // inserindo o registro atravez do metodo attach do realacionamento N x N recebendo um array assosiativo com varios registros
+        $pedido->produtos_do_pedido()->attach([
+            $request->get('produto_id') => [
+                'quantidade' => $request->get('quantidade')
+            ]
         ]);
+
         return redirect()->route('pedido.show', $pedido->id);
     }
 

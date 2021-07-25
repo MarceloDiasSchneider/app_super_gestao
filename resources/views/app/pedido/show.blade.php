@@ -27,12 +27,14 @@
                 <table border="1" style="text-align: left; width: 100%; min-width: 350px;">
                     <tr>
                             <td>Produto</td>
+                            <td>Quantidade</td>
                             <td>Adicionado em</td>
                             <td>Ver pedido</td>
                     </tr>
                     @foreach ($pedido->produtos_do_pedido as $produto)
                         <tr>
                             <td>{{ $produto->nome }}</td>
+                            <td>{{ $produto->pivot->quantidade }}</td>
                             <td>{{ $produto->pivot->created_at->format('d/m/Y') }}</td>
                             <td><a href="{{ route('produto.show', compact('produto')) }}">{{ $produto->id }}</a></td>
                         </tr>
